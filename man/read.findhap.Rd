@@ -18,9 +18,9 @@ read.findhap(Nanim, Nmark, file="./genotypes.filled")
 }
 \arguments{
 
-\item{Nanim}{Total number of individuals with complete and partial genotypes.}
-\item{Nmark}{Total number of SNP genotypes.}
-\item{file}{findhap's output file for imputed genotypes. Default is \sQuote{genotypes.filled}.}
+\item{Nanim}{Total number of individuals to read from imputed genotypes file.}
+\item{Nmark}{Total number of SNP genotypes in the imputed-to chip.}
+\item{file}{Findhap's output file for imputed genotypes. Default is \sQuote{genotypes.filled}.}
 
 }
 

@@ -49,13 +49,13 @@ arrayAppend = function(topA, bottomA, missingVal = 5) {
         stop("Something other than ARS-, chech and interfere manually!")
 
       ## 2. Order of SNPs is not the same
-      topA = rbind(topA, bottomA[,colnames(topA)])
+      topA = rbind(topA, bottomA[,colnames(topA), drop=FALSE])
     }
   }
   else {
     ## Exclude SNPs in bottomA (new data) that are not in topA (old data)
     u <- which((is.element(colnames(bottomA), colnames(topA))))
-    bottomA <- bottomA[,u]
+    bottomA <- bottomA[,u, drop=FALSE]
 
     ## if bottomA is for a single animal
     if(dim(as.matrix(bottomA))[2] == 1) bottomA <- t(as.matrix(bottomA))
@@ -64,7 +64,7 @@ arrayAppend = function(topA, bottomA, missingVal = 5) {
     u <- which((!is.element(colnames(topA), colnames(bottomA))))
     tA <- array(missingVal, c(nrow(bottomA), length(u)), dimnames=list(rownames(bottomA), colnames(topA)[u]))
     bottomA <- cbind( bottomA, tA )
-    topA = rbind(topA, bottomA[,colnames(topA)])
+    topA = rbind(topA, bottomA[,colnames(topA), drop=FALSE])
   }
 
   topA
@@ -143,7 +143,8 @@ snpRecode <- function(snpG, designat) {
   if(length(b) == 2) { ## regular autosomal snp
     if(b[1] != designat[1]) {
       tempb = b; b[1] = tempb[2]; b[2] = tempb[1]
-      if(b[1] != designat[1]) stop("Designated and actual bases mismatched")
+      ## if Designated and actual bases mismatch use unkown '--'
+      if(b[1] != designat[1]) b[1] <- b[2] <- '-'
     }
     AA <- paste(b[1], b[1], sep="")
     AB <- paste(b[1], b[2], sep="")

@@ -6,7 +6,7 @@ int isIdentical(int *x, int *y, int k, int n) {
   int i, xyNot = 0, xyNotOp = 0;
 
   for(i=0; i<n; i++) if(x[i] != y[i]) xyNot++;
-  for(i=0; i<n; i++) if(x[i] != fabs(y[i]-2)) xyNotOp++;
+  for(i=0; i<n; i++) if(x[i] != abs(y[i]-2)) xyNotOp++;
   if(xyNotOp < xyNot) xyNot = xyNotOp;
   if(xyNot <= k) return 1;
   else return 0;

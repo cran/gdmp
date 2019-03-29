@@ -35,8 +35,8 @@ void cReadGenotypes(int *r, int *c, int *h, int *g, char **path) {
   k = 0;
   l = 0;
   for(i=1; i<=rr; i++) {
-    fgets(line, size, fp);
-    sscanf(line, "%d %d %d", &h[l], &h[l+1], &h[l+2]);
+    if(fgets(line, size, fp)) 
+      sscanf(line, "%d %d %d", &h[l], &h[l+1], &h[l+2]);
     l+=3;
     for(j=31; j < cc; j++) { a[0] = line[j]; g[k++] = atoi(a); }
   }

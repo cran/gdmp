@@ -23,7 +23,7 @@ long records(FILE *fpd) {
   long  count=0, size=sizeof line;
 
   rewind(fpd);
-  fgets(line, size, fpd); count++; /* count a line */
+  if(fgets(line, size, fpd)) count++; /* count a line */
 
   if(strlen(line) >= LINELEN-1) Error("records(): ---  Increase LINELEN  ---");
 
